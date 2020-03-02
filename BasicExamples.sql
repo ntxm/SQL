@@ -37,4 +37,30 @@ WHERE HR.DEPARTMENTS.department_id IS NULL
 OR HR.EMPLOYEES.department_id IS NULL
 
 
+-- get locations
+SELECT * FROM HR.LOCATIONS;
 
+-- copy table with  data from HR.LOCATIONS to NEW_LOCATIONS
+CREATE TABLE NEW_LOCATIONS 
+AS 
+SELECT * FROM HR.LOCATIONS;
+
+-- get locations from new table
+SELECT * FROM NEW_LOCATIONS;
+
+-- add new row into NEW_LOCATIONS
+INSERT INTO NEW_LOCATIONS(LOCATION_ID, STREET_ADDRESS, POSTAL_CODE, CITY, STATE_PROVINCE, COUNTRY_ID)
+                    VALUES(3300, 'Father Capadano 409', 11302, 'Staten Island', 'NY', 'US');  
+                    
+                    
+-- get locations from new table
+SELECT * FROM NEW_LOCATIONS;
+
+-- check whether 2 given tables are identical or not
+    -- way 1
+SELECT * FROM HR.LOCATIONS
+UNION
+SELECT * FROM NEW_LOCATIONS;
+
+    -- way 2 (works for MySQL)
+CHECKSUM TABLE HR.LOCATIONS, NEW_LOCATIONS;    
